@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Unicode;
 using Windows.Storage;
 
-namespace Symbol_Mapper_Project.Ligatures
+namespace Symbol_Mapper_Project.Mapper
 {
     internal static class SymbolMapper
     {

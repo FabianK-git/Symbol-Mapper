@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project-WinUIEx-Unicode\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj": {}
+    "C:\\Users\\tpgbl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project-WinUIEx-Unicode\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj": {
+    "C:\\Users\\tpgbl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project-WinUIEx-Unicode\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
+        "projectUniqueName": "C:\\Users\\tpgbl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
         "projectName": "Symbol_Mapper_Project",
-        "projectPath": "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project-WinUIEx-Unicode\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
+        "projectPath": "C:\\Users\\tpgbl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
         "packagesPath": "C:\\Users\\tpgbl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project-WinUIEx-Unicode\\Symbol_Mapper_Project\\obj\\",
+        "outputPath": "C:\\Users\\tpgbl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,10 +97,6 @@
             },
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-              "version": "[6.0.15, 6.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
               "version": "[6.0.15, 6.0.15]"
             },
             {

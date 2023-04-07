@@ -8,7 +8,7 @@ using WinRT;
 using WinRT.Interop;
 using System.Threading.Tasks;
 using Microsoft.UI.Composition.SystemBackdrops;
-using Symbol_Mapper_Project.Ligatures;
+using Symbol_Mapper_Project.Mapper;
 using System.Runtime.InteropServices;
 using HotKeyHandler;
 using Windows.System;
