@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Symbol_Mapper_Project (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Symbol_Mapper_Project (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

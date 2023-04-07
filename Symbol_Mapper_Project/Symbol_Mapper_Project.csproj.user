@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
+    <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
+    <Source>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</Source>
+    <SmallTileSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</SmallTileSource>
+    <MediumTileSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</MediumTileSource>
+    <WideTileSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</WideTileSource>
+    <LargeTileSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</LargeTileSource>
+    <AppIconSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</AppIconSource>
+    <SplashScreenSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\TpGBl\Desktop\Symbol_Mapper_Project\symbol_mapper_icon.png</PackageLogoSource>
+    <ActiveDebugProfile>Symbol_Mapper_Project (Package)</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+</Project>
