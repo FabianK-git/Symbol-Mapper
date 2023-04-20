@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:tb="using:H.NotifyIcon">
- 
+
     <Grid Background="#00000000"
           KeyUp="OnKeyUp">
         <Grid.Resources>
@@ -44,16 +44,15 @@
                 <MenuFlyoutItem Command="{StaticResource ExitApplicationCommand}" />
                 <MenuFlyoutItem Command="{StaticResource ToogleHexCommand}" />
             </MenuFlyout>
-            
         </Grid.Resources>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
- 
+
         <Grid.RowDefinitions>
             <RowDefinition Height="60px" />
-            <RowDefinition Height="250px" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Border Background="#00000000"
@@ -69,35 +68,39 @@
                         ToolTipText="Symbol Mapper">
             <tb:TaskbarIcon.GeneratedIcon>
                 <tb:GeneratedIcon Text="."
-                              Foreground="White"
-                              FontFamily="Segoe UI Emoji"
-                              Background="#000249"
-                              FontWeight="Bold"
-                              FontSize="120" />
+                                  Foreground="White"
+                                  FontFamily="Segoe UI Emoji"
+                                  Background="#000249"
+                                  FontWeight="Bold"
+                                  FontSize="120" />
             </tb:TaskbarIcon.GeneratedIcon>
         </tb:TaskbarIcon>
 
-        <AutoSuggestBox x:Name="searchbox"
-                        Grid.Column="0" 
-                        Grid.Row="0" 
-                        FontSize="24"
-                        AllowDrop="True"
-                        TabNavigation="Cycle"
-                        AutoMaximizeSuggestionArea="True"
-                        GotFocus="OnFocusGot"
-                        LostFocus="OnFocusLost"
-                        TextChanged="OnTextChanged"
-                        QuerySubmitted="OnQuerySubmitted"
-                        PlaceholderText="Type Expression" 
-                        TextMemberPath="UnicodeCharacter">
-            <AutoSuggestBox.ItemContainerStyle>
+        <!-- Searchbox -->
+        <TextBox x:Name="searchbox"
+                 Grid.Column="0" 
+                 Grid.Row="0"
+                 PlaceholderText="Type Expression" 
+                 FontSize="24"
+                 GotFocus="OnFocusGot"
+                 LostFocus="OnFocusLost" 
+                 TextChanged="OnTextChanged"
+                 PreviewKeyDown="OnPreviewKeyDown" />
+
+        <ListView x:Name="search_display"
+                  Grid.Column="0" 
+                  Grid.Row="1"
+                  Background="{StaticResource LightDarkBrush}"
+                  IsItemClickEnabled="True"
+                  ItemClick="OnItemClicked">
+            <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="40" />
                     <Setter Property="FontSize" Value="25" />
                     <Setter Property="Background" Value="Transparent" />
                 </Style>
-            </AutoSuggestBox.ItemContainerStyle>
-            <AutoSuggestBox.ItemTemplate>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -112,7 +115,7 @@
                                    Foreground="#a5a5a5" />
                     </Grid>
                 </DataTemplate>
-            </AutoSuggestBox.ItemTemplate>
-        </AutoSuggestBox>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

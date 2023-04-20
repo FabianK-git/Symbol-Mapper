@@ -17,6 +17,18 @@
             <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled">#00000000</SolidColorBrush>
             <SolidColorBrush x:Key="WindowCaptionForeground">#00000000</SolidColorBrush>
             <SolidColorBrush x:Key="WindowCaptionForegroundDisabled">#00000000</SolidColorBrush>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="LightDarkBrush" Color="#FFFFFF" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="LightDarkBrush" Color="#383838" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="LightDarkBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

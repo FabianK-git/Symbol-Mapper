@@ -15,6 +15,10 @@ using Windows.System;
 using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
+using System.Collections;
+using Windows.ApplicationModel.Activation;
+using Microsoft.UI.Input;
+using System.Diagnostics;
 
 namespace Symbol_Mapper_Project
 {
@@ -33,10 +37,12 @@ namespace Symbol_Mapper_Project
 
         readonly int window_up_displacement = 200;
 
-        WindowsSystemDispatcherQueueHelper m_wsdqHelper;
-        DesktopAcrylicController m_acrylicController;
-        SystemBackdropConfiguration m_configurationSource;
+        private WindowsSystemDispatcherQueueHelper m_wsdqHelper;
+        private DesktopAcrylicController m_acrylicController;
+        private SystemBackdropConfiguration m_configurationSource;
 
+        private string searchbox_last_value = string.Empty;
+        
         #region Window styles
         [Flags]
         public enum ExtendedWindowStyles
@@ -69,7 +75,7 @@ namespace Symbol_Mapper_Project
             // User32.SetWindowPos(hwnd, new IntPtr(0), middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_SHOWWINDOW);
             HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
             HwndExtensions.HideWindow(hwnd);
-
+            
             // Register Global HotKeys
             HotKey.Instance.SetHwnd(hwnd);
             HotKey.Instance.NewGlobalHotKey(HotKey.MOD_KEY.CONTROL | HotKey.MOD_KEY.NOREPEAT, HotKey.VKey.SPACE);
@@ -146,6 +152,7 @@ namespace Symbol_Mapper_Project
         private void OnFocusGot(object sender, RoutedEventArgs e)
         {
             searchbox.Text = string.Empty;
+            searchbox_last_value = string.Empty;
 
             List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol("");
 
@@ -159,7 +166,7 @@ namespace Symbol_Mapper_Project
                 User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
             }
 
-            searchbox.ItemsSource = search_result;
+            search_display.ItemsSource = search_result;
         }
         
         private void OnFocusLost(object sender, RoutedEventArgs e)
@@ -173,9 +180,108 @@ namespace Symbol_Mapper_Project
             }, 1);
         }
         
-        private void OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs e)
+        private void OnPreviewKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            // Implement keyboard movement
+            // and don't allow one SPACE as the first character
+            switch (e.Key)
+            {
+                case VirtualKey.Down:
+                case VirtualKey.Tab:
+                {
+                    e.Handled = true;
+
+                    int last_index = search_display.SelectedIndex;
+
+                    if (last_index == -1)
+                    {
+                        searchbox_last_value = searchbox.Text;
+                    }
+                    
+                    int list_len = (search_display.ItemsSource as IList).Count;
+
+                    if (list_len > 0)
+                    {
+                        int next_index = (last_index + 1) % list_len;
+
+                        search_display.SelectedIndex = next_index;
+
+                        searchbox.Text = (search_display.SelectedItem as UnicodeData).UnicodeCharacter;
+                        search_display.ScrollIntoView(search_display.SelectedItem);
+
+                        if (next_index == 0 && (last_index + 1) > 0)
+                        {
+                            search_display.SelectedIndex = -1;
+                            searchbox.Text = searchbox_last_value;
+                        }
+                    }
+                    else
+                    {
+                        search_display.SelectedIndex = -1;
+                    }
+
+                    searchbox.SelectionStart = searchbox.Text.Length;
+                    searchbox.SelectionLength = 0;
+
+                    break;
+                }
+                
+                case VirtualKey.Up:
+                {
+                    int last_index = search_display.SelectedIndex;
+                    int next_index = last_index - 1;
+
+                    if (search_display.SelectedIndex == 0)
+                    {
+                        search_display.SelectedIndex = -1;
+
+                        searchbox.Text = searchbox_last_value;
+                    }
+                    else if (next_index < -1)
+                    {
+                        int list_len = (search_display.ItemsSource as IList).Count;
+
+                        search_display.SelectedIndex = list_len - 1;
+                        search_display.ScrollIntoView(search_display.SelectedItem);
+                        
+                        searchbox.Text = (search_display.SelectedItem as UnicodeData).UnicodeCharacter;
+                    }
+                    else
+                    {
+                        search_display.SelectedIndex = next_index;
+                        search_display.ScrollIntoView(search_display.SelectedItem);
+
+                        searchbox.Text = (search_display.SelectedItem as UnicodeData).UnicodeCharacter;
+                    }
+
+                    searchbox.SelectionStart = searchbox.Text.Length;
+                    searchbox.SelectionLength = 0;
+
+                    break;
+                }
+
+                case VirtualKey.Space:
+                    if (searchbox.Text.Length == 0)
+                    {
+                        e.Handled = true;
+                    }
+                    break;
+
+                case VirtualKey.Enter:
+                    QuerySubmitted();
+                    break;
+
+                default:
+                    search_display.SelectedIndex = -1;
+                    break;
+            }
+        }
+        
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (search_display.SelectedIndex == -1 &&
+                (searchbox.Text == string.Empty || 
+                searchbox.Text != searchbox_last_value))
             {
                 if (searchbox.Text.Trim() == string.Empty)
                 {
@@ -194,25 +300,31 @@ namespace Symbol_Mapper_Project
                     User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
                 }
 
-                sender.ItemsSource = search_result;
+                search_display.ItemsSource = search_result;
             }
         }
+        
+        private void OnItemClicked(object _, ItemClickEventArgs e)
+        {
+            search_display.SelectedItem = e.ClickedItem;
 
-        private void OnQuerySubmitted(object _, AutoSuggestBoxQuerySubmittedEventArgs e)
+            QuerySubmitted();
+        }
+        
+        private void QuerySubmitted()
         {
             string symbol = string.Empty;
             
-            if (e.ChosenSuggestion != null)
+            if (search_display.SelectedItem != null)
             {
-                try
+                if (search_display.SelectedItem is UnicodeData item)
                 {
-                    symbol = (e.ChosenSuggestion as UnicodeData).UnicodeCharacter.ToString();
+                    symbol = item.UnicodeCharacter.ToString();
                 }
-                catch { }
             }
             else
             {
-                List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol(e.QueryText.Trim().ToLower());
+                List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol(searchbox.Text.Trim().ToLower());
 
                 if (search_result.Count > 0)
                 {
@@ -268,7 +380,7 @@ namespace Symbol_Mapper_Project
                 HandleHotKey();
             }
         }
-
+        
         private void OnKeyUp(object _, KeyRoutedEventArgs e)
         {
             if (Visible && e.Key == VirtualKey.Escape) 

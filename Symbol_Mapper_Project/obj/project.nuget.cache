@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "d/JcBHCmmbaN5CwbQVgG+7RxAbalOt3EOOFH2s99Ptu5A7CaoLF6x8x/FFZx4GDZhSEYgNZs6EgDCx+y0YXudg==",
+  "dgSpecHash": "Gd2tla60x1omrDpFVx+XaZRSm2R0CBUFmpaFtJ9KUPUUFO5NoO0jXSPmF1Qn9SsDCMqO+Rybm311+X/nJ9vmNQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\tpgbl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
   "expectedPackageFiles": [
@@ -22,16 +22,16 @@
     "C:\\Users\\tpgbl\\.nuget\\packages\\unicodeinformation\\2.6.0\\unicodeinformation.2.6.0.nupkg.sha512",
     "C:\\Users\\tpgbl\\.nuget\\packages\\validation\\2.4.15\\validation.2.4.15.nupkg.sha512",
     "C:\\Users\\tpgbl\\.nuget\\packages\\winuiex\\2.1.0\\winuiex.2.1.0.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.15\\microsoft.netcore.app.runtime.win-x86.6.0.15.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.16\\microsoft.netcore.app.runtime.win-x86.6.0.16.nupkg.sha512",
     "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.28\\microsoft.windows.sdk.net.ref.10.0.19041.28.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.15\\microsoft.aspnetcore.app.runtime.win-x86.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.netcore.app.runtime.win-arm64\\6.0.15\\microsoft.netcore.app.runtime.win-arm64.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.15\\microsoft.aspnetcore.app.runtime.win-x64.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-arm64\\6.0.15\\microsoft.windowsdesktop.app.runtime.win-arm64.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.15\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-arm64\\6.0.15\\microsoft.aspnetcore.app.runtime.win-arm64.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.15\\microsoft.netcore.app.runtime.win-x64.6.0.15.nupkg.sha512",
-    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.15\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.15.nupkg.sha512"
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.16\\microsoft.aspnetcore.app.runtime.win-x86.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.netcore.app.runtime.win-arm64\\6.0.16\\microsoft.netcore.app.runtime.win-arm64.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.16\\microsoft.aspnetcore.app.runtime.win-x64.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-arm64\\6.0.16\\microsoft.windowsdesktop.app.runtime.win-arm64.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.16\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-arm64\\6.0.16\\microsoft.aspnetcore.app.runtime.win-arm64.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.16\\microsoft.netcore.app.runtime.win-x64.6.0.16.nupkg.sha512",
+    "C:\\Users\\tpgbl\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.16\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }
