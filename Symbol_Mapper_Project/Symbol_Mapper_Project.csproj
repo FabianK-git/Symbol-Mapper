@@ -21,6 +21,9 @@
     <AppxBundle>Never</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Components\Searchbox.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -32,9 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.86" />
+    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.108" />
     <PackageReference Include="KeyboardHookLite" Version="1.1.3" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230118.102" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230331000" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25281-preview" />
     <PackageReference Include="PInvoke.User32" Version="0.7.124" />
     <PackageReference Include="UnicodeInformation" Version="2.6.0" />
@@ -49,6 +52,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Components\Searchbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!-- 

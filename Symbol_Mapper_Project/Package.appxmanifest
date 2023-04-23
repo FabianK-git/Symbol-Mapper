@@ -9,7 +9,7 @@
   <Identity
     Name="fbbaf842-1b64-4978-8d3f-bd33e47d95bd"
     Publisher="CN=Fabian Kanefke"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <Properties>
     <DisplayName>Symbol Mapper</DisplayName>

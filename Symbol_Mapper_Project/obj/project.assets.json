@@ -2,19 +2,26 @@
   "version": 3,
   "targets": {
     "net6.0-windows10.0.19041": {
-      "DesktopBridge.Helpers/1.2.2": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        }
-      },
-      "H.NotifyIcon/2.0.86": {
+      "H.GeneratedIcons.System.Drawing/2.0.108": {
         "type": "package",
         "dependencies": {
-          "System.Drawing.Common": "6.0.0"
+          "System.Drawing.Common": "7.0.0"
+        },
+        "compile": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "H.NotifyIcon/2.0.108": {
+        "type": "package",
+        "dependencies": {
+          "H.GeneratedIcons.System.Drawing": "2.0.108"
         },
         "compile": {
           "lib/net6.0/H.NotifyIcon.dll": {
@@ -27,12 +34,11 @@
           }
         }
       },
-      "H.NotifyIcon.WinUI/2.0.86": {
+      "H.NotifyIcon.WinUI/2.0.108": {
         "type": "package",
         "dependencies": {
-          "DesktopBridge.Helpers": "1.2.2",
-          "H.NotifyIcon": "2.0.86",
-          "Microsoft.WindowsAppSDK": "1.2.230118.102"
+          "H.NotifyIcon": "2.0.108",
+          "Microsoft.WindowsAppSDK": "1.2.230217.4"
         },
         "compile": {
           "lib/net6.0-windows10.0.17763/H.NotifyIcon.WinUI.dll": {
@@ -57,7 +63,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "Microsoft.Win32.SystemEvents/6.0.0": {
+      "Microsoft.Win32.SystemEvents/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -70,7 +76,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         },
         "runtimeTargets": {
           "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -86,7 +92,7 @@
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.2.230118.102": {
+      "Microsoft.WindowsAppSDK/1.3.230331000": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22621.1"
@@ -119,7 +125,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "runtime": {
           "lib/net6.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {
@@ -149,7 +156,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
@@ -247,10 +255,10 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "System.Drawing.Common/6.0.0": {
+      "System.Drawing.Common/7.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "6.0.0"
+          "Microsoft.Win32.SystemEvents": "7.0.0"
         },
         "compile": {
           "lib/net6.0/System.Drawing.Common.dll": {
@@ -263,13 +271,9 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/net6.0/System.Drawing.Common.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
           "runtimes/win/lib/net6.0/System.Drawing.Common.dll": {
             "assetType": "runtime",
             "rid": "win"
@@ -341,19 +345,26 @@
       }
     },
     "net6.0-windows10.0.19041/win10-arm64": {
-      "DesktopBridge.Helpers/1.2.2": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        }
-      },
-      "H.NotifyIcon/2.0.86": {
+      "H.GeneratedIcons.System.Drawing/2.0.108": {
         "type": "package",
         "dependencies": {
-          "System.Drawing.Common": "6.0.0"
+          "System.Drawing.Common": "7.0.0"
+        },
+        "compile": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "H.NotifyIcon/2.0.108": {
+        "type": "package",
+        "dependencies": {
+          "H.GeneratedIcons.System.Drawing": "2.0.108"
         },
         "compile": {
           "lib/net6.0/H.NotifyIcon.dll": {
@@ -366,12 +377,11 @@
           }
         }
       },
-      "H.NotifyIcon.WinUI/2.0.86": {
+      "H.NotifyIcon.WinUI/2.0.108": {
         "type": "package",
         "dependencies": {
-          "DesktopBridge.Helpers": "1.2.2",
-          "H.NotifyIcon": "2.0.86",
-          "Microsoft.WindowsAppSDK": "1.2.230118.102"
+          "H.NotifyIcon": "2.0.108",
+          "Microsoft.WindowsAppSDK": "1.2.230217.4"
         },
         "compile": {
           "lib/net6.0-windows10.0.17763/H.NotifyIcon.WinUI.dll": {
@@ -396,7 +406,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "Microsoft.Win32.SystemEvents/6.0.0": {
+      "Microsoft.Win32.SystemEvents/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -409,7 +419,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "Microsoft.Windows.SDK.BuildTools/10.0.25281-preview": {
@@ -419,7 +429,7 @@
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.2.230118.102": {
+      "Microsoft.WindowsAppSDK/1.3.230331000": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22621.1"
@@ -452,7 +462,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "runtime": {
           "lib/net6.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {
@@ -482,7 +493,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "native": {
           "runtimes/win10-arm64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {}
@@ -569,10 +581,10 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "System.Drawing.Common/6.0.0": {
+      "System.Drawing.Common/7.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "6.0.0"
+          "Microsoft.Win32.SystemEvents": "7.0.0"
         },
         "compile": {
           "lib/net6.0/System.Drawing.Common.dll": {
@@ -585,7 +597,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "System.Memory/4.5.4": {
@@ -653,19 +665,26 @@
       }
     },
     "net6.0-windows10.0.19041/win10-x64": {
-      "DesktopBridge.Helpers/1.2.2": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        }
-      },
-      "H.NotifyIcon/2.0.86": {
+      "H.GeneratedIcons.System.Drawing/2.0.108": {
         "type": "package",
         "dependencies": {
-          "System.Drawing.Common": "6.0.0"
+          "System.Drawing.Common": "7.0.0"
+        },
+        "compile": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "H.NotifyIcon/2.0.108": {
+        "type": "package",
+        "dependencies": {
+          "H.GeneratedIcons.System.Drawing": "2.0.108"
         },
         "compile": {
           "lib/net6.0/H.NotifyIcon.dll": {
@@ -678,12 +697,11 @@
           }
         }
       },
-      "H.NotifyIcon.WinUI/2.0.86": {
+      "H.NotifyIcon.WinUI/2.0.108": {
         "type": "package",
         "dependencies": {
-          "DesktopBridge.Helpers": "1.2.2",
-          "H.NotifyIcon": "2.0.86",
-          "Microsoft.WindowsAppSDK": "1.2.230118.102"
+          "H.NotifyIcon": "2.0.108",
+          "Microsoft.WindowsAppSDK": "1.2.230217.4"
         },
         "compile": {
           "lib/net6.0-windows10.0.17763/H.NotifyIcon.WinUI.dll": {
@@ -708,7 +726,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "Microsoft.Win32.SystemEvents/6.0.0": {
+      "Microsoft.Win32.SystemEvents/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -721,7 +739,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "Microsoft.Windows.SDK.BuildTools/10.0.25281-preview": {
@@ -731,7 +749,7 @@
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.2.230118.102": {
+      "Microsoft.WindowsAppSDK/1.3.230331000": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22621.1"
@@ -764,7 +782,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "runtime": {
           "lib/net6.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {
@@ -794,7 +813,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "native": {
           "runtimes/win10-x64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {}
@@ -881,10 +901,10 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "System.Drawing.Common/6.0.0": {
+      "System.Drawing.Common/7.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "6.0.0"
+          "Microsoft.Win32.SystemEvents": "7.0.0"
         },
         "compile": {
           "lib/net6.0/System.Drawing.Common.dll": {
@@ -897,7 +917,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "System.Memory/4.5.4": {
@@ -965,19 +985,26 @@
       }
     },
     "net6.0-windows10.0.19041/win10-x86": {
-      "DesktopBridge.Helpers/1.2.2": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/DesktopBridge.Helpers.dll": {}
-        }
-      },
-      "H.NotifyIcon/2.0.86": {
+      "H.GeneratedIcons.System.Drawing/2.0.108": {
         "type": "package",
         "dependencies": {
-          "System.Drawing.Common": "6.0.0"
+          "System.Drawing.Common": "7.0.0"
+        },
+        "compile": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/H.GeneratedIcons.System.Drawing.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "H.NotifyIcon/2.0.108": {
+        "type": "package",
+        "dependencies": {
+          "H.GeneratedIcons.System.Drawing": "2.0.108"
         },
         "compile": {
           "lib/net6.0/H.NotifyIcon.dll": {
@@ -990,12 +1017,11 @@
           }
         }
       },
-      "H.NotifyIcon.WinUI/2.0.86": {
+      "H.NotifyIcon.WinUI/2.0.108": {
         "type": "package",
         "dependencies": {
-          "DesktopBridge.Helpers": "1.2.2",
-          "H.NotifyIcon": "2.0.86",
-          "Microsoft.WindowsAppSDK": "1.2.230118.102"
+          "H.NotifyIcon": "2.0.108",
+          "Microsoft.WindowsAppSDK": "1.2.230217.4"
         },
         "compile": {
           "lib/net6.0-windows10.0.17763/H.NotifyIcon.WinUI.dll": {
@@ -1020,7 +1046,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "Microsoft.Win32.SystemEvents/6.0.0": {
+      "Microsoft.Win32.SystemEvents/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -1033,7 +1059,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "Microsoft.Windows.SDK.BuildTools/10.0.25281-preview": {
@@ -1043,7 +1069,7 @@
           "build/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
-      "Microsoft.WindowsAppSDK/1.2.230118.102": {
+      "Microsoft.WindowsAppSDK/1.3.230331000": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.BuildTools": "10.0.22621.1"
@@ -1076,7 +1102,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "runtime": {
           "lib/net6.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll": {
@@ -1106,7 +1133,8 @@
           },
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll": {},
           "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll": {},
-          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {},
+          "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll": {}
         },
         "native": {
           "runtimes/win10-x86/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {}
@@ -1193,10 +1221,10 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "System.Drawing.Common/6.0.0": {
+      "System.Drawing.Common/7.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "6.0.0"
+          "Microsoft.Win32.SystemEvents": "7.0.0"
         },
         "compile": {
           "lib/net6.0/System.Drawing.Common.dll": {
@@ -1209,7 +1237,7 @@
           }
         },
         "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "System.Memory/4.5.4": {
@@ -1278,31 +1306,39 @@
     }
   },
   "libraries": {
-    "DesktopBridge.Helpers/1.2.2": {
-      "sha512": "2GHlYoAwhIXn7kfSNLmrg272XWoaM8XDYjJAc4fZNaKSRq0+G2nB/BNExZkB7ftir6YauV+cxQBMQL70GnEWiQ==",
+    "H.GeneratedIcons.System.Drawing/2.0.108": {
+      "sha512": "0+E+fn6uKcI5bnDiTzYuephKQPFGZDjzyL6cQFtSJN1+IuDzIFFu+bl/79wYUUUjKO3Y3gufiOqx3DcxdAqYhw==",
       "type": "package",
-      "path": "desktopbridge.helpers/1.2.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "desktopbridge.helpers.1.2.2.nupkg.sha512",
-        "desktopbridge.helpers.nuspec",
-        "lib/net45/DesktopBridge.Helpers.dll",
-        "lib/netstandard2.0/DesktopBridge.Helpers.dll"
-      ]
-    },
-    "H.NotifyIcon/2.0.86": {
-      "sha512": "a2+cHeRESaBUzeZ6dkBX1VAapYTkGu/QD4R9/zZYiVSOHYk5aCuVxlZN8+Y3+vO1W5hIvrr1qzcb1m/+4udEuQ==",
-      "type": "package",
-      "path": "h.notifyicon/2.0.86",
+      "path": "h.generatedicons.system.drawing/2.0.108",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "h.notifyicon.2.0.86.nupkg.sha512",
+        "h.generatedicons.system.drawing.2.0.108.nupkg.sha512",
+        "h.generatedicons.system.drawing.nuspec",
+        "lib/net462/H.GeneratedIcons.System.Drawing.dll",
+        "lib/net462/H.GeneratedIcons.System.Drawing.xml",
+        "lib/net6.0/H.GeneratedIcons.System.Drawing.dll",
+        "lib/net6.0/H.GeneratedIcons.System.Drawing.xml",
+        "lib/net7.0/H.GeneratedIcons.System.Drawing.dll",
+        "lib/net7.0/H.GeneratedIcons.System.Drawing.xml",
+        "lib/netstandard2.0/H.GeneratedIcons.System.Drawing.dll",
+        "lib/netstandard2.0/H.GeneratedIcons.System.Drawing.xml",
+        "nuget_icon.png"
+      ]
+    },
+    "H.NotifyIcon/2.0.108": {
+      "sha512": "SR5Hera16ZEGWxzBF9ogmxDmRK+97FfymTGb1ma21W1CcOsKknAvMD9CvLHDWX1GWLUdMJhB4grZV3gnb5Tx+g==",
+      "type": "package",
+      "path": "h.notifyicon/2.0.108",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "h.notifyicon.2.0.108.nupkg.sha512",
         "h.notifyicon.nuspec",
-        "lib/net46/H.NotifyIcon.dll",
-        "lib/net46/H.NotifyIcon.xml",
+        "lib/net462/H.NotifyIcon.dll",
+        "lib/net462/H.NotifyIcon.xml",
         "lib/net6.0/H.NotifyIcon.dll",
         "lib/net6.0/H.NotifyIcon.xml",
         "lib/net7.0/H.NotifyIcon.dll",
@@ -1312,15 +1348,15 @@
         "nuget_icon.png"
       ]
     },
-    "H.NotifyIcon.WinUI/2.0.86": {
-      "sha512": "bolBmulGqlXOxs3Ausjuhmm5noNGAAfa0Q/NjQ6sD3jP9NH6I8sx+imKzJC7iQ0QDSAenoDAWxsl8pILsEy3TQ==",
+    "H.NotifyIcon.WinUI/2.0.108": {
+      "sha512": "QuWP/CWpKPiLGa7m6gWj59okdGFqx1g7MXCB5p2UeurpkXvZOy1irW+lXtQswpaJM+O5hA+VwzwT79cpCDZWcg==",
       "type": "package",
-      "path": "h.notifyicon.winui/2.0.86",
+      "path": "h.notifyicon.winui/2.0.108",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "h.notifyicon.winui.2.0.86.nupkg.sha512",
+        "h.notifyicon.winui.2.0.108.nupkg.sha512",
         "h.notifyicon.winui.nuspec",
         "lib/net6.0-windows10.0.17763/H.NotifyIcon.WinUI.dll",
         "lib/net6.0-windows10.0.17763/H.NotifyIcon.WinUI.pri",
@@ -1345,32 +1381,34 @@
         "lib/net6.0-windows7.0/KeyboardHookLite.dll"
       ]
     },
-    "Microsoft.Win32.SystemEvents/6.0.0": {
-      "sha512": "hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
+    "Microsoft.Win32.SystemEvents/7.0.0": {
+      "sha512": "2nXPrhdAyAzir0gLl8Yy8S5Mnm/uBSQQA7jEsILOS1MTyS7DbmV1NgViMtvV1sfCD1ebITpNwb1NIinKeJgUVQ==",
       "type": "package",
-      "path": "microsoft.win32.systemevents/6.0.0",
+      "path": "microsoft.win32.systemevents/7.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
         "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
-        "buildTransitive/netcoreapp3.1/_._",
-        "lib/net461/Microsoft.Win32.SystemEvents.dll",
-        "lib/net461/Microsoft.Win32.SystemEvents.xml",
+        "lib/net462/Microsoft.Win32.SystemEvents.dll",
+        "lib/net462/Microsoft.Win32.SystemEvents.xml",
         "lib/net6.0/Microsoft.Win32.SystemEvents.dll",
         "lib/net6.0/Microsoft.Win32.SystemEvents.xml",
-        "lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
-        "lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.xml",
         "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
         "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+        "microsoft.win32.systemevents.7.0.0.nupkg.sha512",
         "microsoft.win32.systemevents.nuspec",
         "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -1566,10 +1604,10 @@
         "schemas/10.0.25281.0/winrt/UapManifestSchema_v8.xsd"
       ]
     },
-    "Microsoft.WindowsAppSDK/1.2.230118.102": {
-      "sha512": "MyHPzz4NSo+ulXkQ1sVo83SaZTFUcz429oy1m7lTfaxyU5St48p3TgzKKFRwe3WtpUf9OAUReYBCczIkojfmTQ==",
+    "Microsoft.WindowsAppSDK/1.3.230331000": {
+      "sha512": "9KoT2ArYEMHpIeNdM+woBXizdxM0ZuyIgsE/kf2UvIYuWW3g/jKTCcy3uY9HS3tdyTZEaAb6kRWkkNjaxJ3kHA==",
       "type": "package",
-      "path": "microsoft.windowsappsdk/1.2.230118.102",
+      "path": "microsoft.windowsappsdk/1.3.230331000",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -1604,6 +1642,7 @@
         "build/Microsoft.Build.Msix.Common.props",
         "build/Microsoft.Build.Msix.Cpp.props",
         "build/Microsoft.Build.Msix.Cpp.targets",
+        "build/Microsoft.Build.Msix.Cs.targets",
         "build/Microsoft.Build.Msix.DesignTime.targets",
         "build/Microsoft.Build.Msix.Packaging.targets",
         "build/Microsoft.Build.Msix.Pri.targets",
@@ -1656,6 +1695,7 @@
         "build/ProjectItemsSchema.xaml",
         "build/README.md",
         "build/Rules/MsixPackageDebugPropertyPage.xaml",
+        "build/Rules/WindowsPackageTypePropertyPage.xaml",
         "build/Rules/af-ZA/MsixPackageDebugPropertyPage.xaml",
         "build/Rules/ar-SA/MsixPackageDebugPropertyPage.xaml",
         "build/Rules/az-Latn-AZ/MsixPackageDebugPropertyPage.xaml",
@@ -1762,6 +1802,7 @@
         "buildTransitive/Microsoft.Build.Msix.Common.props",
         "buildTransitive/Microsoft.Build.Msix.Cpp.props",
         "buildTransitive/Microsoft.Build.Msix.Cpp.targets",
+        "buildTransitive/Microsoft.Build.Msix.Cs.targets",
         "buildTransitive/Microsoft.Build.Msix.DesignTime.targets",
         "buildTransitive/Microsoft.Build.Msix.Packaging.targets",
         "buildTransitive/Microsoft.Build.Msix.Pri.targets",
@@ -1814,6 +1855,7 @@
         "buildTransitive/ProjectItemsSchema.xaml",
         "buildTransitive/README.md",
         "buildTransitive/Rules/MsixPackageDebugPropertyPage.xaml",
+        "buildTransitive/Rules/WindowsPackageTypePropertyPage.xaml",
         "buildTransitive/Rules/af-ZA/MsixPackageDebugPropertyPage.xaml",
         "buildTransitive/Rules/ar-SA/MsixPackageDebugPropertyPage.xaml",
         "buildTransitive/Rules/az-Latn-AZ/MsixPackageDebugPropertyPage.xaml",
@@ -1955,6 +1997,7 @@
         "lib/net6.0-windows10.0.17763.0/Microsoft.Windows.System.Projection.dll",
         "lib/net6.0-windows10.0.17763.0/Microsoft.Windows.Widgets.Projection.dll",
         "lib/net6.0-windows10.0.17763.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll",
+        "lib/net6.0-windows10.0.17763.0/Microsoft.WindowsAppRuntime.Release.Net.dll",
         "lib/net6.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.dll",
         "lib/net6.0-windows10.0.18362.0/Microsoft.InteractiveExperiences.Projection.xml",
         "lib/net6.0-windows10.0.18362.0/Microsoft.WinUI.dll",
@@ -1977,6 +2020,7 @@
         "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.System.Projection.dll",
         "lib/net6.0-windows10.0.18362.0/Microsoft.Windows.Widgets.Projection.dll",
         "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll",
+        "lib/net6.0-windows10.0.18362.0/Microsoft.WindowsAppRuntime.Release.Net.dll",
         "lib/uap10.0.17763/Microsoft.Foundation.winmd",
         "lib/uap10.0.17763/Microsoft.Foundation.xml",
         "lib/uap10.0.17763/Microsoft.Graphics.winmd",
@@ -2031,26 +2075,26 @@
         "manifests/Microsoft.InteractiveExperiences.manifest",
         "manifests/Microsoft.WindowsAppSdk.Foundation.manifest",
         "manifests/manifests/Microsoft.WindowsAppSdk.WinUI.manifest",
-        "microsoft.windowsappsdk.1.2.230118.102.nupkg.sha512",
+        "microsoft.windowsappsdk.1.3.230331000.nupkg.sha512",
         "microsoft.windowsappsdk.nuspec",
         "runtimes/win10-arm64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll",
         "runtimes/win10-x64/native/Microsoft.WindowsAppRuntime.Bootstrap.dll",
         "runtimes/win10-x86/native/Microsoft.WindowsAppRuntime.Bootstrap.dll",
         "tools/MSIX/win10-arm64/MSIX.inventory",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.1.2.msix",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.DDLM.1.2.msix",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Main.1.2.msix",
-        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Singleton.1.2.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.1.3.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.DDLM.1.3.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Main.1.3.msix",
+        "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.Singleton.1.3.msix",
         "tools/MSIX/win10-x64/MSIX.inventory",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.1.2.msix",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.DDLM.1.2.msix",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Main.1.2.msix",
-        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Singleton.1.2.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.1.3.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.DDLM.1.3.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Main.1.3.msix",
+        "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.Singleton.1.3.msix",
         "tools/MSIX/win10-x86/MSIX.inventory",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.1.2.msix",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.DDLM.1.2.msix",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Main.1.2.msix",
-        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Singleton.1.2.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.1.3.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.DDLM.1.3.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Main.1.3.msix",
+        "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.Singleton.1.3.msix",
         "tools/NOTICE.txt",
         "tools/arm64/GenXbf.dll",
         "tools/net472/Microsoft.Bcl.AsyncInterfaces.dll",
@@ -2071,6 +2115,7 @@
         "tools/net472/System.Collections.Immutable.dll",
         "tools/net472/System.Memory.dll",
         "tools/net472/System.Numerics.Vectors.dll",
+        "tools/net472/System.Reflection.Metadata.dll",
         "tools/net472/System.Runtime.CompilerServices.Unsafe.dll",
         "tools/net472/System.Text.Encodings.Web.dll",
         "tools/net472/System.Text.Json.dll",
@@ -2369,41 +2414,39 @@
         "version.txt"
       ]
     },
-    "System.Drawing.Common/6.0.0": {
-      "sha512": "NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+    "System.Drawing.Common/7.0.0": {
+      "sha512": "KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
       "type": "package",
-      "path": "system.drawing.common/6.0.0",
+      "path": "system.drawing.common/7.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Drawing.Common.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
         "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
-        "buildTransitive/netcoreapp3.1/_._",
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
-        "lib/net461/System.Drawing.Common.dll",
-        "lib/net461/System.Drawing.Common.xml",
+        "lib/net462/System.Drawing.Common.dll",
+        "lib/net462/System.Drawing.Common.xml",
         "lib/net6.0/System.Drawing.Common.dll",
         "lib/net6.0/System.Drawing.Common.xml",
-        "lib/netcoreapp3.1/System.Drawing.Common.dll",
-        "lib/netcoreapp3.1/System.Drawing.Common.xml",
+        "lib/net7.0/System.Drawing.Common.dll",
+        "lib/net7.0/System.Drawing.Common.xml",
         "lib/netstandard2.0/System.Drawing.Common.dll",
         "lib/netstandard2.0/System.Drawing.Common.xml",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "runtimes/unix/lib/net6.0/System.Drawing.Common.dll",
-        "runtimes/unix/lib/net6.0/System.Drawing.Common.xml",
-        "runtimes/unix/lib/netcoreapp3.1/System.Drawing.Common.dll",
-        "runtimes/unix/lib/netcoreapp3.1/System.Drawing.Common.xml",
         "runtimes/win/lib/net6.0/System.Drawing.Common.dll",
         "runtimes/win/lib/net6.0/System.Drawing.Common.xml",
-        "runtimes/win/lib/netcoreapp3.1/System.Drawing.Common.dll",
-        "runtimes/win/lib/netcoreapp3.1/System.Drawing.Common.xml",
-        "system.drawing.common.6.0.0.nupkg.sha512",
+        "runtimes/win/lib/net7.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/net7.0/System.Drawing.Common.xml",
+        "system.drawing.common.7.0.0.nupkg.sha512",
         "system.drawing.common.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -2543,10 +2586,10 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows10.0.19041": [
-      "H.NotifyIcon.WinUI >= 2.0.86",
+      "H.NotifyIcon.WinUI >= 2.0.108",
       "KeyboardHookLite >= 1.1.3",
       "Microsoft.Windows.SDK.BuildTools >= 10.0.25281-preview",
-      "Microsoft.WindowsAppSDK >= 1.2.230118.102",
+      "Microsoft.WindowsAppSDK >= 1.3.230331000",
       "PInvoke.User32 >= 0.7.124",
       "UnicodeInformation >= 2.6.0",
       "WinUIEx >= 2.1.0"
@@ -2600,7 +2643,7 @@
         "dependencies": {
           "H.NotifyIcon.WinUI": {
             "target": "Package",
-            "version": "[2.0.86, )"
+            "version": "[2.0.108, )"
           },
           "KeyboardHookLite": {
             "target": "Package",
@@ -2612,7 +2655,7 @@
           },
           "Microsoft.WindowsAppSDK": {
             "target": "Package",
-            "version": "[1.2.230118.102, )"
+            "version": "[1.3.230331000, )"
           },
           "PInvoke.User32": {
             "target": "Package",
