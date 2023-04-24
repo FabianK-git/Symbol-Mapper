@@ -2596,23 +2596,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TpGBl\\.nuget\\packages\\": {},
+    "C:\\Users\\tpgbl\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TpGBl\\Desktop\\Symbol-Mapper\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
+      "projectUniqueName": "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
       "projectName": "Symbol_Mapper_Project",
-      "projectPath": "C:\\Users\\TpGBl\\Desktop\\Symbol-Mapper\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
-      "packagesPath": "C:\\Users\\TpGBl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TpGBl\\Desktop\\Symbol-Mapper\\Symbol_Mapper_Project\\obj\\",
+      "projectPath": "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project.csproj",
+      "packagesPath": "C:\\Users\\tpgbl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TpGBl\\Desktop\\Projects\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\Symbol_Mapper_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\TpGBl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tpgbl\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2622,7 +2622,8 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://pkgs.dev.azure.com/dotnet/CommunityToolkit/_packaging/CommunityToolkit-PullRequests/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows10.0.19041": {
