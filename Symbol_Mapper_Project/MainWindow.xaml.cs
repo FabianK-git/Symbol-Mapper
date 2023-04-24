@@ -16,6 +16,7 @@ using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
 using Symbol_Mapper_Project.Components;
+using System.Diagnostics;
 
 namespace Symbol_Mapper_Project
 {
@@ -37,7 +38,7 @@ namespace Symbol_Mapper_Project
         private WindowsSystemDispatcherQueueHelper m_wsdqHelper;
         private DesktopAcrylicController m_acrylicController;
         private SystemBackdropConfiguration m_configurationSource;
-        
+
         #region Window styles
         [Flags]
         public enum ExtendedWindowStyles
@@ -94,9 +95,19 @@ namespace Symbol_Mapper_Project
             // Add show hex values to local storage - default false
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
+            Debug.WriteLine(localSettings.Values.ContainsKey("hex_values"));
             if (!localSettings.Values.ContainsKey("hex_values"))
             {
                 localSettings.Values.Add("hex_values", false);
+            }
+
+            if ((bool) localSettings.Values["hex_values"])
+            {
+                menu_hex_toggle.Text = "Disable hex values";
+            }
+            else
+            {
+                menu_hex_toggle.Text = "Enable hex values";
             }
 
             // Add Trayicon menu
@@ -117,6 +128,15 @@ namespace Symbol_Mapper_Project
             if (localSettings.Values["hex_values"] != null)
             {
                 localSettings.Values["hex_values"] = !(bool) localSettings.Values["hex_values"];
+            }
+
+            if ((bool)localSettings.Values["hex_values"])
+            {
+                menu_hex_toggle.Text = "Disable hex values";
+            }
+            else
+            {
+                menu_hex_toggle.Text = "Enable hex values";
             }
         }
         #endregion

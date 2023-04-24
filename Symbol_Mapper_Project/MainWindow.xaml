@@ -32,8 +32,8 @@
 
             <XamlUICommand x:Key="ToogleHexCommand"
                            ExecuteRequested="ToogleHexValues_ExecuteRequested"
-                           Label="Toggle Hex values"
-                           Description="Toggle Hex values">
+                           Label="Toggle hex values"
+                           Description="Toggle hex values">
                 <XamlUICommand.IconSource>
                     <SymbolIconSource Symbol="Pin" />
                 </XamlUICommand.IconSource>
@@ -42,8 +42,12 @@
             <MenuFlyout x:Name="tray_menu"
                         x:Key="TrayContextFlyout"
                         AreOpenCloseAnimationsEnabled="False">
-                <MenuFlyoutItem Command="{StaticResource ExitApplicationCommand}" />
-                <MenuFlyoutItem Command="{StaticResource ToogleHexCommand}" />
+                <MenuFlyoutItem x:Name="menu_exit" 
+                                Text="Exit"
+                                Command="{StaticResource ExitApplicationCommand}" />
+                <MenuFlyoutItem x:Name="menu_hex_toggle" 
+                                Text="Toggle hex values" 
+                                Command="{StaticResource ToogleHexCommand}" />
             </MenuFlyout>
         </Grid.Resources>
 

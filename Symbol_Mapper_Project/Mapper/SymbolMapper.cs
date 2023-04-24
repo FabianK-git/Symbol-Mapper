@@ -91,7 +91,7 @@ namespace Symbol_Mapper_Project.Mapper
 
                                 if (description.Contains("_(0x") &&
                                     localSettings.Values["hex_values"] != null &&
-                                    ((bool) localSettings.Values["hex_values"]))
+                                    !(bool) localSettings.Values["hex_values"])
                                 {
                                     description = description.Split("_(0x", 2)[0];
                                 }
