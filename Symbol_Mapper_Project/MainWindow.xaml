@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="using:Symbol_Mapper_Project"
+        xmlns:components="using:Symbol_Mapper_Project.Components"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
@@ -65,57 +66,17 @@
         </Border>
 
         <tb:TaskbarIcon x:Name="taskbar_icon" 
-                        ToolTipText="Symbol Mapper">
-            <tb:TaskbarIcon.GeneratedIcon>
-                <tb:GeneratedIcon Text="."
-                                  Foreground="White"
-                                  FontFamily="Segoe UI Emoji"
-                                  Background="#000249"
-                                  FontWeight="Bold"
-                                  FontSize="120" />
-            </tb:TaskbarIcon.GeneratedIcon>
+                        ToolTipText="Symbol Mapper"
+                        IconSource="Assets/TrayIcon/trayIcon.ico">
         </tb:TaskbarIcon>
 
-        <!-- Searchbox -->
-        <TextBox x:Name="searchbox"
-                 Grid.Column="0" 
-                 Grid.Row="0"
-                 PlaceholderText="Type Expression" 
-                 FontSize="24"
-                 GotFocus="OnFocusGot"
-                 LostFocus="OnFocusLost" 
-                 TextChanged="OnTextChanged"
-                 PreviewKeyDown="OnPreviewKeyDown" />
-
-        <ListView x:Name="search_display"
-                  Grid.Column="0" 
-                  Grid.Row="1"
-                  Background="{StaticResource LightDarkBrush}"
-                  IsItemClickEnabled="True"
-                  ItemClick="OnItemClicked">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Height" Value="40" />
-                    <Setter Property="FontSize" Value="25" />
-                    <Setter Property="Background" Value="Transparent" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding UnicodeCharacter}" 
-                                   Grid.Column="0" />
-                        <TextBlock Text="{Binding Desciption}" 
-                                   Grid.Column="1"
-                                   FontSize="22"
-                                   Foreground="#a5a5a5" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <components:Searchbox x:Name="searchbox"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Grid.RowSpan="2"
+                              TextChanged="OnTextChanged"
+                              QuerySubmitted="OnQuerySubmitted"
+                              FocusGot="OnFocusGot"
+                              FocusLost="OnFocusLost" />
     </Grid>
 </Window>

@@ -15,10 +15,7 @@ using Windows.System;
 using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
-using System.Collections;
-using Windows.ApplicationModel.Activation;
-using Microsoft.UI.Input;
-using System.Diagnostics;
+using Symbol_Mapper_Project.Components;
 
 namespace Symbol_Mapper_Project
 {
@@ -40,8 +37,6 @@ namespace Symbol_Mapper_Project
         private WindowsSystemDispatcherQueueHelper m_wsdqHelper;
         private DesktopAcrylicController m_acrylicController;
         private SystemBackdropConfiguration m_configurationSource;
-
-        private string searchbox_last_value = string.Empty;
         
         #region Window styles
         [Flags]
@@ -152,7 +147,6 @@ namespace Symbol_Mapper_Project
         private void OnFocusGot(object sender, RoutedEventArgs e)
         {
             searchbox.Text = string.Empty;
-            searchbox_last_value = string.Empty;
 
             List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol("");
 
@@ -166,7 +160,7 @@ namespace Symbol_Mapper_Project
                 User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
             }
 
-            search_display.ItemsSource = search_result;
+            searchbox.ListView.ItemsSource = search_result;
         }
         
         private void OnFocusLost(object sender, RoutedEventArgs e)
@@ -180,144 +174,35 @@ namespace Symbol_Mapper_Project
             }, 1);
         }
         
-        private void OnPreviewKeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            // Implement keyboard movement
-            // and don't allow one SPACE as the first character
-            switch (e.Key)
-            {
-                case VirtualKey.Down:
-                case VirtualKey.Tab:
-                {
-                    e.Handled = true;
-
-                    int last_index = search_display.SelectedIndex;
-
-                    if (last_index == -1)
-                    {
-                        searchbox_last_value = searchbox.Text;
-                    }
-                    
-                    int list_len = (search_display.ItemsSource as IList).Count;
-
-                    if (list_len > 0)
-                    {
-                        int next_index = (last_index + 1) % list_len;
-
-                        search_display.SelectedIndex = next_index;
-
-                        searchbox.Text = (search_display.SelectedItem as UnicodeData).UnicodeCharacter;
-                        search_display.ScrollIntoView(search_display.SelectedItem);
-
-                        if (next_index == 0 && (last_index + 1) > 0)
-                        {
-                            search_display.SelectedIndex = -1;
-                            searchbox.Text = searchbox_last_value;
-                        }
-                    }
-                    else
-                    {
-                        search_display.SelectedIndex = -1;
-                    }
-
-                    searchbox.SelectionStart = searchbox.Text.Length;
-                    searchbox.SelectionLength = 0;
-
-                    break;
-                }
-                
-                case VirtualKey.Up:
-                {
-                    int last_index = search_display.SelectedIndex;
-                    int next_index = last_index - 1;
-
-                    if (search_display.SelectedIndex == 0)
-                    {
-                        search_display.SelectedIndex = -1;
-
-                        searchbox.Text = searchbox_last_value;
-                    }
-                    else if (next_index < -1)
-                    {
-                        int list_len = (search_display.ItemsSource as IList).Count;
-
-                        search_display.SelectedIndex = list_len - 1;
-                        search_display.ScrollIntoView(search_display.SelectedItem);
-                        
-                        searchbox.Text = (search_display.SelectedItem as UnicodeData).UnicodeCharacter;
-                    }
-                    else
-                    {
-                        search_display.SelectedIndex = next_index;
-                        search_display.ScrollIntoView(search_display.SelectedItem);
-
-                        searchbox.Text = (search_display.SelectedItem as UnicodeData).UnicodeCharacter;
-                    }
-
-                    searchbox.SelectionStart = searchbox.Text.Length;
-                    searchbox.SelectionLength = 0;
-
-                    break;
-                }
-
-                case VirtualKey.Space:
-                    if (searchbox.Text.Length == 0)
-                    {
-                        e.Handled = true;
-                    }
-                    break;
-
-                case VirtualKey.Enter:
-                    QuerySubmitted();
-                    break;
-
-                default:
-                    search_display.SelectedIndex = -1;
-                    break;
-            }
-        }
-        
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (search_display.SelectedIndex == -1 &&
-                (searchbox.Text == string.Empty || 
-                searchbox.Text != searchbox_last_value))
+            if (searchbox.Text.Trim() == string.Empty)
             {
-                if (searchbox.Text.Trim() == string.Empty)
-                {
-                    searchbox.Text = string.Empty;
-                }
-
-                List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol(searchbox.Text.Trim().ToLower());
-
-                if (set_dynamic_height)
-                {
-                    int amount = (search_result.Count) > 8 ? 8 : search_result.Count;
-
-                    window_size_y = window_size_y_smallest + (amount * 40);
-                    window_size_y += (amount > 0) ? 5 : 0;
-
-                    User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
-                }
-
-                search_display.ItemsSource = search_result;
+                searchbox.Text = string.Empty;
             }
-        }
-        
-        private void OnItemClicked(object _, ItemClickEventArgs e)
-        {
-            search_display.SelectedItem = e.ClickedItem;
 
-            QuerySubmitted();
+            List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol(searchbox.Text.Trim().ToLower());
+
+            if (set_dynamic_height)
+            {
+                int amount = (search_result.Count) > 8 ? 8 : search_result.Count;
+
+                window_size_y = window_size_y_smallest + (amount * 40);
+                window_size_y += (amount > 0) ? 5 : 0;
+
+                User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
+            }
+
+            searchbox.ListView.ItemsSource = search_result;
         }
         
-        private void QuerySubmitted()
+        private void OnQuerySubmitted(object _, SearchboxQuerySubmittedEventArgs e)
         {
             string symbol = string.Empty;
             
-            if (search_display.SelectedItem != null)
+            if (e.SelectedItem != null)
             {
-                if (search_display.SelectedItem is UnicodeData item)
+                if (e.SelectedItem is UnicodeData item)
                 {
                     symbol = item.UnicodeCharacter.ToString();
                 }
