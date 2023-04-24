@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -23,6 +23,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Components\Searchbox.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\TrayIcon\trayIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
   </ItemGroup>
 
   <ItemGroup>

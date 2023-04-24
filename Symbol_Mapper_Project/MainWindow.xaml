@@ -67,12 +67,16 @@
 
         <tb:TaskbarIcon x:Name="taskbar_icon" 
                         ToolTipText="Symbol Mapper"
-                        IconSource="./Assets/SmallTile.scale-100.png">
+                        IconSource="Assets/TrayIcon/trayIcon.ico">
         </tb:TaskbarIcon>
 
         <components:Searchbox x:Name="searchbox"
                               Grid.Row="0"
                               Grid.Column="0"
-                              Grid.RowSpan="2" />
+                              Grid.RowSpan="2"
+                              TextChanged="OnTextChanged"
+                              QuerySubmitted="OnQuerySubmitted"
+                              FocusGot="OnFocusGot"
+                              FocusLost="OnFocusLost" />
     </Grid>
 </Window>

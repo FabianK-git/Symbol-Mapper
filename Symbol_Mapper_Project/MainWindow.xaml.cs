@@ -15,6 +15,7 @@ using Windows.System;
 using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
+using Symbol_Mapper_Project.Components;
 
 namespace Symbol_Mapper_Project
 {
@@ -195,13 +196,13 @@ namespace Symbol_Mapper_Project
             searchbox.ListView.ItemsSource = search_result;
         }
         
-        private void QuerySubmitted()
+        private void OnQuerySubmitted(object _, SearchboxQuerySubmittedEventArgs e)
         {
             string symbol = string.Empty;
             
-            if (searchbox.ListView.SelectedItem != null)
+            if (e.SelectedItem != null)
             {
-                if (searchbox.ListView.SelectedItem is UnicodeData item)
+                if (e.SelectedItem is UnicodeData item)
                 {
                     symbol = item.UnicodeCharacter.ToString();
                 }

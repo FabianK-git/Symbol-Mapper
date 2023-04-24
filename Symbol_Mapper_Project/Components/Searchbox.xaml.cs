@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Symbol_Mapper_Project.Models;
@@ -12,15 +13,18 @@ namespace Symbol_Mapper_Project.Components
 {
     public class SearchboxQuerySubmittedEventArgs : EventArgs
     {
-        public object selected_item;
+        public object SelectedItem;
     }
 
     public sealed partial class Searchbox : UserControl
     {
         private string searchbox_last_value = string.Empty;
 
-        public EventHandler<TextChangedEventArgs> TextChanged;
-        public EventHandler<SearchboxQuerySubmittedEventArgs> QuerySubmitted;
+        public event EventHandler<TextChangedEventArgs> TextChanged;
+        public event EventHandler<SearchboxQuerySubmittedEventArgs> QuerySubmitted;
+
+        public event EventHandler<RoutedEventArgs> FocusGot;
+        public event EventHandler<RoutedEventArgs> FocusLost;
 
         public string Text
         {
@@ -142,7 +146,7 @@ namespace Symbol_Mapper_Project.Components
                 case VirtualKey.Enter:
                     SearchboxQuerySubmittedEventArgs args = new()
                     {
-                        selected_item = search_display.SelectedItem
+                        SelectedItem = search_display.SelectedItem
                     };
 
                     OnQuerySubmitted(args);
@@ -170,7 +174,7 @@ namespace Symbol_Mapper_Project.Components
 
             SearchboxQuerySubmittedEventArgs args = new()
             {
-                selected_item = e.ClickedItem
+                SelectedItem = e.ClickedItem
             };
 
             OnQuerySubmitted(args);
@@ -179,6 +183,16 @@ namespace Symbol_Mapper_Project.Components
         private void OnQuerySubmitted(SearchboxQuerySubmittedEventArgs e)
         {
             QuerySubmitted?.Invoke(this, e);
+        }
+
+        private void OnFocusGot(object _, RoutedEventArgs e)
+        {
+            FocusGot?.Invoke(this, e);
+        }
+
+        private void OnFocusLost(object _, RoutedEventArgs e)
+        {
+            FocusLost?.Invoke(this, e);
         }
     }
 }
