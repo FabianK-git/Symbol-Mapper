@@ -4,12 +4,21 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Unicode;
 using Windows.Storage;
+using Microsoft.Data.Sqlite;
+using System.Collections;
+using System.IO;
+using System;
+using System.Reflection;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Linq;
 
 namespace Symbol_Mapper_Project.Mapper
 {
     internal static class SymbolMapper
     {
         public static IDictionary<string, string> symbolMap;
+
+        private readonly static string db_path;
 
         static SymbolMapper()
         {
@@ -60,74 +69,62 @@ namespace Symbol_Mapper_Project.Mapper
 
                 { "checkmark", "✓" }
             };
+
+            db_path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Database", "characters.db");
+
+            SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
         }
-        
+
         public static List<UnicodeData> MapStringToSymbol(string input)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
             List<UnicodeData> search_result = new();
 
-            foreach (string key in symbolMap.Keys)
+            using (SqliteConnection db = new($"Filename={db_path}"))
             {
-                if (key.Contains('_'))
+                db.Open();
+
+                string where_statement = string.Empty;
+
+                foreach (string word in input.Split(" "))
                 {
-                    bool contains = false;
-
-                    foreach (string split in input.Split(" "))
+                    if (string.IsNullOrEmpty(where_statement))
                     {
-                        contains = key.Contains(split);
-
-                        if (contains == false) break;
+                        where_statement += $" WHERE LOWER(Description) LIKE '%{word}%' "; ;
                     }
-
-                    if (contains)
+                    else
                     {
-                        if (search_result.Count < 100)
-                        {
-                            if (symbolMap.ContainsKey(key))
-                            {
-                                string description = key;
-
-                                if (description.Contains("_(0x") &&
-                                    localSettings.Values["hex_values"] != null &&
-                                    !(bool) localSettings.Values["hex_values"])
-                                {
-                                    description = description.Split("_(0x", 2)[0];
-                                }
-
-                                search_result.Add(new UnicodeData() 
-                                {
-                                    UnicodeCharacter = symbolMap[key],
-                                    Desciption = description.Replace("_", " ")
-                                });
-                            }
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        where_statement += $" AND LOWER(Description) LIKE '%{word}%' ";
                     }
                 }
-                else
+                
+                SqliteCommand command = new($"SELECT CodePoint, Character, LOWER(Description) FROM characters {where_statement} LIMIT 100;", db);
+                
+                Debug.WriteLine(command.CommandText);
+                
+                SqliteDataReader query = command.ExecuteReader();
+
+                while (query.Read())
                 {
-                    if (key.Contains(input))
+                    Debug.WriteLine($"{query.GetString(0)}, {query.GetString(1)}, {query.GetString(2)}");
+
+                    string desciption = query.GetString(2);
+
+                    // Include hex values if wanted
+                    if (localSettings.Values["hex_values"] != null &&
+                        (bool) localSettings.Values["hex_values"])
                     {
-                        string description = key;
+                        string code_point = query.GetString(0);
 
-                        if (localSettings.Values["hex_values"] != null &&
-                            ((bool) localSettings.Values["hex_values"]) &&
-                            description.Contains("_(0x"))
-                        {
-                            description = description.Split("_(0x", 2)[0];
-                        }
-
-                        search_result.Add(new UnicodeData()
-                        {
-                            UnicodeCharacter = symbolMap[key],
-                            Desciption = description.Replace("_", " ")
-                        });
+                        desciption += $" (0x{code_point})";
                     }
+
+                    search_result.Add(new UnicodeData()
+                    {
+                        UnicodeCharacter = query.GetString(1),
+                        Desciption = desciption
+                    });
                 }
             }
 
