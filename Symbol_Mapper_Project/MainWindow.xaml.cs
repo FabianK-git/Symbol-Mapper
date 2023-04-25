@@ -16,7 +16,8 @@ using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
 using Symbol_Mapper_Project.Components;
-using System.Diagnostics;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 
 namespace Symbol_Mapper_Project
 {
@@ -25,19 +26,27 @@ namespace Symbol_Mapper_Project
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        // Window handle
         readonly IntPtr hwnd;
 
+        // Window width
         readonly int window_size_x = 700;
 
+        // If the window size adapts dynamicly and the height
         readonly bool set_dynamic_height = true;
         int window_size_y = 70;
         readonly int window_size_y_smallest = 70;
 
+        // How many pixels does the window get moved upwards
         readonly int window_up_displacement = 200;
 
+        // Variables for the acrylic backdrop
         private WindowsSystemDispatcherQueueHelper m_wsdqHelper;
         private DesktopAcrylicController m_acrylicController;
         private SystemBackdropConfiguration m_configurationSource;
+
+        // If the window was already activated
+        private bool activated;
 
         #region Window styles
         [Flags]
@@ -51,6 +60,24 @@ namespace Symbol_Mapper_Project
         {
             this.InitializeComponent();
 
+            // Set the activated flag
+            activated = false;
+
+            // Get window Handle
+            hwnd = WindowNative.GetWindowHandle(this);
+
+            // Remove application from taskbar and `Alt + Tab`
+            int exStyle = User32.GetWindowLong(hwnd, User32.WindowLongIndexFlags.GWL_EXSTYLE);
+            exStyle |= (int) ExtendedWindowStyles.WS_EX_TOOLWINDOW;
+            User32.SetWindowLongPtr(hwnd, User32.WindowLongIndexFlags.GWL_EXSTYLE, (IntPtr) exStyle);
+
+            // Disable resize on the window
+            WindowId window_id = Win32Interop.GetWindowIdFromWindow(hwnd);
+            AppWindow app_window = AppWindow.GetFromWindowId(window_id);
+            OverlappedPresenter presenter = app_window.Presenter as OverlappedPresenter;
+
+            presenter.IsResizable = false;
+            
             // Set height
             window_size_y = (set_dynamic_height) ? window_size_y_smallest : 310;
 
@@ -64,9 +91,6 @@ namespace Symbol_Mapper_Project
 
             int middle_x = screensize_x / 2;
             int middle_y = screensize_y / 2;
-
-            // Get window Handle
-            hwnd = WindowNative.GetWindowHandle(this);
 
             // User32.SetWindowPos(hwnd, new IntPtr(0), middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_SHOWWINDOW);
             HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
@@ -95,7 +119,6 @@ namespace Symbol_Mapper_Project
             // Add show hex values to local storage - default false
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-            Debug.WriteLine(localSettings.Values.ContainsKey("hex_values"));
             if (!localSettings.Values.ContainsKey("hex_values"))
             {
                 localSettings.Values.Add("hex_values", false);
@@ -298,14 +321,17 @@ namespace Symbol_Mapper_Project
         {
             if (!Visible)
             {
+                if (!activated)
+                {
+                    Activate();
+                    activated = true;
+                }
+
                 int screensize_x = User32.GetSystemMetrics(User32.SystemMetric.SM_CXFULLSCREEN);
                 int screensize_y = User32.GetSystemMetrics(User32.SystemMetric.SM_CYFULLSCREEN);
 
                 int middle_x = screensize_x / 2;
                 int middle_y = screensize_y / 2;
-
-                // User32.SetWindowPos(hwnd, new IntPtr(0), middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_SHOWWINDOW);
-                // User32.ShowWindow(hwnd, User32.WindowShowStyle.SW_SHOWNORMAL);
 
                 HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
                 HwndExtensions.ShowWindow(hwnd);
@@ -319,8 +345,6 @@ namespace Symbol_Mapper_Project
             }
             else
             {
-                // User32.ShowWindow(hwnd, User32.WindowShowStyle.SW_HIDE);
-                // HwndExtensions.SetAlwaysOnTop(hwnd, false);
                 HwndExtensions.HideWindow(hwnd);
             }
         }
