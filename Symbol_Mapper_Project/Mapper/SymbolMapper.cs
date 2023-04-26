@@ -91,17 +91,15 @@ namespace Symbol_Mapper_Project.Mapper
                 {
                     if (string.IsNullOrEmpty(where_statement))
                     {
-                        where_statement += $" WHERE LOWER(Description) LIKE '%{word}%' "; ;
+                        where_statement += $"WHERE LOWER(Description) LIKE '%{word}%'"; ;
                     }
                     else
                     {
-                        where_statement += $" AND LOWER(Description) LIKE '%{word}%' ";
+                        where_statement += $" AND LOWER(Description) LIKE '%{word}%'";
                     }
                 }
                 
                 SqliteCommand command = new($"SELECT CodePoint, Character, LOWER(Description) FROM characters {where_statement} LIMIT 100;", db);
-                
-                Debug.WriteLine(command.CommandText);
                 
                 SqliteDataReader query = command.ExecuteReader();
 
@@ -129,52 +127,6 @@ namespace Symbol_Mapper_Project.Mapper
             }
 
             return search_result;
-        }
-
-        public static void FetchUnicodeData()
-        {
-            ParallelLoopResult loop = Parallel.For(0, 11141110, (i) =>
-            {
-                string name = UnicodeInfo.GetName(i);
-
-                if (name != null &&
-                    !name.Contains("SURROGATE") &&
-                    !name.ToLower().Contains("private use") &&
-                    !name.ToLower().Contains("variation selector") &&
-                    !UnicodeInfo.GetBlockName(i).Contains("Specials"))
-                {
-                    string item = char.ConvertFromUtf32(i);
-
-                    name = name.Replace(" ", "_")
-                               .Replace("-", "_")
-                               .ToLower();
-
-                    if (name.Contains("lamda"))
-                    {
-                        name = name.Replace("lamda", "lambda");
-                    }
-                    
-                    // Add hex value of unicode char on end of name
-                    name += $"_(0x{i:X4})";
-                    
-                    lock (symbolMap)
-                    {
-                        if (!symbolMap.ContainsKey(name))
-                        {
-                            symbolMap.Add(name, item);
-                        }
-                        else
-                        {
-                            Debug.WriteLine($"Already had: {name} with: {symbolMap[name]}, Current item: {item}");
-                        }
-                    }
-                }
-            });
-
-            while (!loop.IsCompleted)
-            {
-                Task.Delay(100);
-            }
         }
     }
 }

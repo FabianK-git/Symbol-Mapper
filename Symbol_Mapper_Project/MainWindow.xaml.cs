@@ -114,8 +114,6 @@ namespace Symbol_Mapper_Project
 
             taskbar_icon.ContextFlyout = flyout;
             
-            SymbolMapper.FetchUnicodeData();
-
             // Add show hex values to local storage - default false
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
