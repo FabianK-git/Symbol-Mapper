@@ -18,7 +18,7 @@
                           FallbackColor="#000000"/>
 
             <XamlUICommand x:Key="ExitApplicationCommand"
-                           ExecuteRequested="ExitApplicationCommand_ExecuteRequested"
+                           ExecuteRequested="OnExitApplication"
                            Label="Exit"
                            Description="Exit">
                 <XamlUICommand.IconSource>
@@ -30,10 +30,19 @@
                 </XamlUICommand.KeyboardAccelerators>
             </XamlUICommand>
 
-            <XamlUICommand x:Key="ToogleHexCommand"
-                           ExecuteRequested="ToogleHexValues_ExecuteRequested"
+            <XamlUICommand x:Key="ToggleHexCommand"
+                           ExecuteRequested="OnToggleHexValues"
                            Label="Toggle hex values"
                            Description="Toggle hex values">
+                <XamlUICommand.IconSource>
+                    <SymbolIconSource Symbol="Pin" />
+                </XamlUICommand.IconSource>
+            </XamlUICommand>
+
+            <XamlUICommand x:Key="ToggleWindowPlacmentCommand"
+                           ExecuteRequested="OnToggleWindowPlacment"
+                           Label="Toggle window placment"
+                           Description="Toggle window placment">
                 <XamlUICommand.IconSource>
                     <SymbolIconSource Symbol="Pin" />
                 </XamlUICommand.IconSource>
@@ -47,7 +56,10 @@
                                 Command="{StaticResource ExitApplicationCommand}" />
                 <MenuFlyoutItem x:Name="menu_hex_toggle" 
                                 Text="Toggle hex values" 
-                                Command="{StaticResource ToogleHexCommand}" />
+                                Command="{StaticResource ToggleHexCommand}" />
+                <MenuFlyoutItem x:Name="menu_placement_toggle" 
+                                Text="Toggle window placement" 
+                                Command="{StaticResource ToggleWindowPlacmentCommand}" />
             </MenuFlyout>
         </Grid.Resources>
 
@@ -60,19 +72,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border Background="#00000000"
-                x:Name="TitleBar"
-                Height="0">
-            <TextBlock x:Name="AppTitle"
-                       Text=""
-                       VerticalAlignment="Top"
-                       Foreground="Red" />
-        </Border>
-
         <tb:TaskbarIcon x:Name="taskbar_icon" 
                         ToolTipText="Symbol Mapper"
-                        IconSource="Assets/TrayIcon/trayIcon.ico">
-        </tb:TaskbarIcon>
+                        IconSource="Assets/TrayIcon/trayIcon.ico" />
 
         <components:Searchbox x:Name="searchbox"
                               Grid.Row="0"
@@ -80,7 +82,6 @@
                               Grid.RowSpan="2"
                               TextChanged="OnTextChanged"
                               QuerySubmitted="OnQuerySubmitted"
-                              FocusGot="OnFocusGot"
                               FocusLost="OnFocusLost" />
     </Grid>
 </Window>
