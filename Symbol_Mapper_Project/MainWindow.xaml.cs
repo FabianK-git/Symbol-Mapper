@@ -15,6 +15,8 @@ using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
 using Symbol_Mapper_Project.Components;
+using System.Diagnostics;
+using System.DirectoryServices;
 
 namespace Symbol_Mapper_Project
 {
@@ -32,11 +34,11 @@ namespace Symbol_Mapper_Project
         // If the window size adapts dynamicly and the height
         readonly bool set_dynamic_height = true;
         int window_size_y = 70;
-        readonly int window_size_y_smallest = 70;
+        readonly int window_size_y_smallest = 60;
 
         // How many pixels does the window get moved upwards
-        readonly int window_up_displacement = 200;
-
+        readonly int window_up_displacement = 50;
+        
         // Variables for the acrylic backdrop
         private WindowsSystemDispatcherQueueHelper m_wsdqHelper;
         private DesktopAcrylicController m_acrylicController;
@@ -79,16 +81,9 @@ namespace Symbol_Mapper_Project
             
             // Set height
             window_size_y = (set_dynamic_height) ? window_size_y_smallest : 310;
-            
-            // Set Position on Window
-            int screensize_x = User32.GetSystemMetrics(User32.SystemMetric.SM_CXFULLSCREEN);
-            int screensize_y = User32.GetSystemMetrics(User32.SystemMetric.SM_CYFULLSCREEN);
-
-            int middle_x = screensize_x / 2;
-            int middle_y = screensize_y / 2;
 
             // Position window in the middle and hide it
-            HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
+            CenterWindowOnCurrentDisplay();
             HwndExtensions.HideWindow(hwnd);
             
             // Register Global HotKeys
@@ -114,11 +109,13 @@ namespace Symbol_Mapper_Project
             // Add show hex values to local storage - default false
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
+            // If local settings does not contain the key set it with false
             if (!localSettings.Values.ContainsKey("hex_values"))
             {
                 localSettings.Values.Add("hex_values", false);
             }
 
+            // Set the trayicon menu text depending on value
             if ((bool) localSettings.Values["hex_values"])
             {
                 menu_hex_toggle.Text = "Disable hex values";
@@ -128,18 +125,34 @@ namespace Symbol_Mapper_Project
                 menu_hex_toggle.Text = "Enable hex values";
             }
 
+            // If local settings does not contain the key set it with false
+            if (!localSettings.Values.ContainsKey("primary_window_placement"))
+            {
+                localSettings.Values.Add("primary_window_placement", false);
+            }
+
+            // Set the trayicon menu text depending on value
+            if ((bool) localSettings.Values["primary_window_placement"])
+            {
+                menu_placement_toggle.Text = "Disable only primary monitor placement";
+            }
+            else
+            {
+                menu_placement_toggle.Text = "Enable only primary monitor placement";
+            }
+
             // Add Trayicon menu
             taskbar_icon.ContextFlyout = tray_menu;
         }
 
         #region Trayicon_Menu
-        private void ExitApplicationCommand_ExecuteRequested(object _, ExecuteRequestedEventArgs args)
+        private void OnExitApplication(object _, ExecuteRequestedEventArgs args)
         {
             this?.Close();
             Environment.Exit(1);
         }
 
-        private void ToogleHexValues_ExecuteRequested(object _, ExecuteRequestedEventArgs args)
+        private void OnToggleHexValues(object _, ExecuteRequestedEventArgs args)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
@@ -148,6 +161,7 @@ namespace Symbol_Mapper_Project
                 localSettings.Values["hex_values"] = !(bool) localSettings.Values["hex_values"];
             }
 
+            // Set the trayicon menu text depending on value
             if ((bool)localSettings.Values["hex_values"])
             {
                 menu_hex_toggle.Text = "Disable hex values";
@@ -155,6 +169,26 @@ namespace Symbol_Mapper_Project
             else
             {
                 menu_hex_toggle.Text = "Enable hex values";
+            }
+        }
+        
+        private void OnToggleWindowPlacment(object _, ExecuteRequestedEventArgs args)
+        {
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+            if (localSettings.Values["primary_window_placement"] != null)
+            {
+                localSettings.Values["primary_window_placement"] = !(bool) localSettings.Values["primary_window_placement"];
+            }
+
+            // Set the trayicon menu text depending on value
+            if ((bool) localSettings.Values["primary_window_placement"])
+            {
+                menu_placement_toggle.Text = "Disable only primary monitor placement";
+            }
+            else
+            {
+                menu_placement_toggle.Text = "Enable only primary monitor placement";
             }
         }
         #endregion
@@ -182,37 +216,14 @@ namespace Symbol_Mapper_Project
         #endregion
 
         #region Suggestionbox_Events
-        private void OnFocusGot(object sender, RoutedEventArgs e)
-        {
-            searchbox.Text = string.Empty;
-
-            List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol("");
-
-            if (set_dynamic_height)
-            {
-                int amount = (search_result.Count) > 8 ? 8 : search_result.Count;
-
-                window_size_y = window_size_y_smallest + (amount * 40);
-                window_size_y += (amount > 0) ? 5 : 0;
-
-                User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
-            }
-
-            searchbox.ListView.ItemsSource = search_result;
-        }
-        
-        private void OnFocusLost(object sender, RoutedEventArgs e)
+        private void OnFocusLost(object _, RoutedEventArgs e)
         {
             window_size_y = window_size_y_smallest;
 
-            _ = RunWithDelay(() =>
-            {
-                // User32.ShowWindow(hwnd, User32.WindowShowStyle.SW_HIDE);
-                HwndExtensions.HideWindow(hwnd);
-            }, 1);
+            HwndExtensions.HideWindow(hwnd);
         }
         
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        private void OnTextChanged(object _, TextChangedEventArgs e)
         {
             if (searchbox.Text.Trim() == string.Empty)
             {
@@ -322,21 +333,35 @@ namespace Symbol_Mapper_Project
                     activated = true;
                 }
 
-                int screensize_x = User32.GetSystemMetrics(User32.SystemMetric.SM_CXFULLSCREEN);
-                int screensize_y = User32.GetSystemMetrics(User32.SystemMetric.SM_CYFULLSCREEN);
+                searchbox.Text = string.Empty;
 
-                int middle_x = screensize_x / 2;
-                int middle_y = screensize_y / 2;
+                List<UnicodeData> search_result = SymbolMapper.MapStringToSymbol("");
 
-                HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
-                HwndExtensions.ShowWindow(hwnd);
-                
-                _ = RunWithDelay(() =>
+                // Change Height depending on amount of data in the ListView
+                int amount = (search_result.Count) > 8 ? 8 : search_result.Count;
+
+                window_size_y = window_size_y_smallest + (amount * 40);
+                window_size_y += (amount > 0) ? 5 : 0;
+
+                searchbox.ListView.ItemsSource = search_result;
+
+                // Set position
+                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+                if (localSettings.Values["primary_window_placement"] != null &&
+                    (bool) localSettings.Values["primary_window_placement"])
                 {
-                    User32.SetForegroundWindow(hwnd);
+                    CenterWindowOnPrimaryDisplay();
+                }
+                else
+                {
+                    CenterWindowOnCurrentDisplay();
+                }
 
-                    searchbox.Focus(FocusState.Keyboard);
-                }, 1);
+                HwndExtensions.ShowWindow(hwnd);
+                HwndExtensions.SetForegroundWindow(hwnd);
+
+                searchbox.Focus(FocusState.Keyboard);
             }
             else
             {
@@ -377,11 +402,45 @@ namespace Symbol_Mapper_Project
             return false; // Acrylic is not supported on this system
         }
         #endregion
-        
-        static async Task RunWithDelay(Action callback, int delay_ms)
+
+        #region Window Placement
+        private void CenterWindowOnCurrentDisplay()
         {
-            await Task.Delay(delay_ms);
-            callback();
+            // Get mouse position
+            POINT mouse_positon = User32.GetCursorPos();
+
+            // Get the display where the mouse is
+            IntPtr current_monitor = User32.MonitorFromPoint(mouse_positon, User32.MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+            // Create the object for the monitor information
+            User32.MONITORINFO monitor_info = new() { cbSize = Marshal.SizeOf(typeof(User32.MONITORINFO)) }; ;
+
+            // If the function returns true place the window on the current monitor,
+            // else try to center it on primary display
+            if (User32.GetMonitorInfo(current_monitor, ref monitor_info))
+            {
+                // Coordinates to center the monitor on the current window
+                double new_window_x = monitor_info.rcWork.left + (monitor_info.rcWork.right - monitor_info.rcWork.left - window_size_x) / 2;
+                double new_window_y = (monitor_info.rcWork.top + (monitor_info.rcWork.bottom - monitor_info.rcWork.top - window_size_y) / 2) - window_up_displacement;
+
+                HwndExtensions.SetWindowPositionAndSize(hwnd, (int) new_window_x, (int) new_window_y, window_size_x, window_size_y);
+            }
+            else
+            {
+                CenterWindowOnPrimaryDisplay();
+            }
         }
+
+        private void CenterWindowOnPrimaryDisplay()
+        {
+            int screensize_x = User32.GetSystemMetrics(User32.SystemMetric.SM_CXFULLSCREEN);
+            int screensize_y = User32.GetSystemMetrics(User32.SystemMetric.SM_CYFULLSCREEN);
+
+            int middle_x = screensize_x / 2;
+            int middle_y = screensize_y / 2;
+
+            HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
+        }
+        #endregion
     }
 }
