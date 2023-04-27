@@ -15,6 +15,7 @@ using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
 using Symbol_Mapper_Project.Components;
+using System.Diagnostics;
 
 namespace Symbol_Mapper_Project
 {
@@ -195,7 +196,26 @@ namespace Symbol_Mapper_Project
                 window_size_y = window_size_y_smallest + (amount * 40);
                 window_size_y += (amount > 0) ? 5 : 0;
 
-                User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
+                POINT mouse_positon = User32.GetCursorPos();
+
+                IntPtr current_monitor = User32.MonitorFromPoint(mouse_positon, User32.MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+                User32.MONITORINFO monitor_info = new() { cbSize = Marshal.SizeOf(typeof(User32.MONITORINFO)) }; ;
+                
+                if (User32.GetMonitorInfo(current_monitor, ref monitor_info))
+                {
+                    double new_window_x = monitor_info.rcWork.left + (monitor_info.rcWork.right - monitor_info.rcWork.left - window_size_x) / 2;
+                    double new_window_y = monitor_info.rcWork.top + (monitor_info.rcWork.bottom - monitor_info.rcWork.top - window_size_y) / 2;
+
+                    Debug.WriteLine($"Current Display [{monitor_info.dwFlags}]: {monitor_info.rcWork.right}:{monitor_info.rcWork.bottom}:{monitor_info.rcWork.left}:{monitor_info.rcWork.top}");
+                    Debug.WriteLine($"New Positions: {new_window_x} {new_window_y}");
+                    
+                    HwndExtensions.SetWindowPositionAndSize(hwnd, (int) new_window_x, (int) new_window_y, window_size_x, window_size_y);
+                }
+                else
+                {
+                    // User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
+                }
             }
 
             searchbox.ListView.ItemsSource = search_result;
@@ -328,7 +348,28 @@ namespace Symbol_Mapper_Project
                 int middle_x = screensize_x / 2;
                 int middle_y = screensize_y / 2;
 
-                HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
+                POINT mouse_positon = User32.GetCursorPos();
+
+                IntPtr current_monitor = User32.MonitorFromPoint(mouse_positon, User32.MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+                User32.MONITORINFO monitor_info = new() { cbSize = Marshal.SizeOf(typeof(User32.MONITORINFO)) }; ;
+
+                if (User32.GetMonitorInfo(current_monitor, ref monitor_info))
+                {
+                    double new_window_x = monitor_info.rcWork.left + (monitor_info.rcWork.right - monitor_info.rcWork.left - window_size_x) / 2;
+                    double new_window_y = monitor_info.rcWork.top + (monitor_info.rcWork.bottom - monitor_info.rcWork.top - window_size_y) / 2;
+
+                    Debug.WriteLine($"Current Display [{monitor_info.dwFlags}]: {monitor_info.rcWork.right}:{monitor_info.rcWork.bottom}:{monitor_info.rcWork.left}:{monitor_info.rcWork.top}");
+                    Debug.WriteLine($"New Positions: {new_window_x} {new_window_y}");
+
+                    HwndExtensions.SetWindowPositionAndSize(hwnd, (int)new_window_x, (int)new_window_y, window_size_x, window_size_y);
+                }
+                else
+                {
+                    // User32.SetWindowPos(hwnd, new IntPtr(0), 0, 0, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_NOMOVE);
+                }
+
+                // HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
                 HwndExtensions.ShowWindow(hwnd);
                 
                 _ = RunWithDelay(() =>
