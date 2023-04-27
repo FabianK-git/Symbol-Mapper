@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using PInvoke;
 using WinRT;
-using WinRT.Interop;
 using System.Threading.Tasks;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Symbol_Mapper_Project.Mapper;
@@ -16,8 +15,6 @@ using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
 using Symbol_Mapper_Project.Components;
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
 
 namespace Symbol_Mapper_Project
 {
@@ -64,27 +61,25 @@ namespace Symbol_Mapper_Project
             activated = false;
 
             // Get window Handle
-            hwnd = WindowNative.GetWindowHandle(this);
+            hwnd = this.GetWindowHandle();
 
             // Remove application from taskbar and `Alt + Tab`
-            int exStyle = User32.GetWindowLong(hwnd, User32.WindowLongIndexFlags.GWL_EXSTYLE);
-            exStyle |= (int) ExtendedWindowStyles.WS_EX_TOOLWINDOW;
-            User32.SetWindowLongPtr(hwnd, User32.WindowLongIndexFlags.GWL_EXSTYLE, (IntPtr) exStyle);
+            int ex_style = User32.GetWindowLong(hwnd, User32.WindowLongIndexFlags.GWL_EXSTYLE);
+            ex_style |= (int) ExtendedWindowStyles.WS_EX_TOOLWINDOW;
+            User32.SetWindowLongPtr(hwnd, User32.WindowLongIndexFlags.GWL_EXSTYLE, (IntPtr) ex_style);
 
+            // Remove minimize, maximize buttons and make the titlebar invisible
+            WindowManager.Get(this).IsTitleBarVisible = false;
+
+            this.SetIsMinimizable(false);
+            this.SetIsMaximizable(false);
+            
             // Disable resize on the window
-            WindowId window_id = Win32Interop.GetWindowIdFromWindow(hwnd);
-            AppWindow app_window = AppWindow.GetFromWindowId(window_id);
-            OverlappedPresenter presenter = app_window.Presenter as OverlappedPresenter;
-
-            presenter.IsResizable = false;
+            this.SetIsResizable(false);
             
             // Set height
             window_size_y = (set_dynamic_height) ? window_size_y_smallest : 310;
-
-            // Use Titlebar space for Window
-            ExtendsContentIntoTitleBar = true;
-            SetTitleBar(TitleBar);
-
+            
             // Set Position on Window
             int screensize_x = User32.GetSystemMetrics(User32.SystemMetric.SM_CXFULLSCREEN);
             int screensize_y = User32.GetSystemMetrics(User32.SystemMetric.SM_CYFULLSCREEN);
@@ -92,7 +87,7 @@ namespace Symbol_Mapper_Project
             int middle_x = screensize_x / 2;
             int middle_y = screensize_y / 2;
 
-            // User32.SetWindowPos(hwnd, new IntPtr(0), middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y, User32.SetWindowPosFlags.SWP_SHOWWINDOW);
+            // Position window in the middle and hide it
             HwndExtensions.SetWindowPositionAndSize(hwnd, middle_x - (window_size_x / 2), middle_y - (window_size_y / 2) - window_up_displacement, window_size_x, window_size_y);
             HwndExtensions.HideWindow(hwnd);
             

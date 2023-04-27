@@ -1,10 +1,4 @@
 ﻿using Microsoft.UI.Xaml;
-using PInvoke;
-using System;
-using static Symbol_Mapper_Project.MainWindow;
-using WinRT.Interop;
-using System.Threading.Tasks;
-using WinUIEx;
 
 namespace Symbol_Mapper_Project
 {
@@ -13,8 +7,6 @@ namespace Symbol_Mapper_Project
     /// </summary>
     public partial class App : Application
     {
-        private static Window MainWindow;
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -28,9 +20,9 @@ namespace Symbol_Mapper_Project
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            MainWindow = new MainWindow();
+            _ = new MainWindow();
         }
     }
 }
