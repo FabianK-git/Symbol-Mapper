@@ -9,7 +9,7 @@
   <Identity
     Name="fbbaf842-1b64-4978-8d3f-bd33e47d95bd"
     Publisher="CN=Fabian Kanefke"
-    Version="1.0.1.0" />
+    Version="1.0.0.0" />
 
   <Properties>
     <DisplayName>Symbol Mapper</DisplayName>
@@ -32,7 +32,7 @@
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
         DisplayName="Symbol Mapper"
-        Description="Allows typing Expressions to map to Unicode characters, or search them with an active Internet connection."
+        Description="Allows typing expressions to map to unicode characters, or search them with an active internet connection."
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using PInvoke;
 using WinRT;
-using System.Threading.Tasks;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Symbol_Mapper_Project.Mapper;
 using System.Runtime.InteropServices;
@@ -15,8 +14,6 @@ using WinUIEx;
 using Symbol_Mapper_Project.Models;
 using Windows.Storage;
 using Symbol_Mapper_Project.Components;
-using System.Diagnostics;
-using System.DirectoryServices;
 
 namespace Symbol_Mapper_Project
 {
