@@ -40,26 +40,27 @@
             </XamlUICommand>
 
             <XamlUICommand x:Key="ToggleWindowPlacmentCommand"
-                           ExecuteRequested="OnToggleWindowPlacment"
+                           ExecuteRequested="OnToggleWindowPlacement"
                            Label="Toggle window placment"
                            Description="Toggle window placment">
                 <XamlUICommand.IconSource>
                     <SymbolIconSource Symbol="Pin" />
                 </XamlUICommand.IconSource>
             </XamlUICommand>
-
+            
             <MenuFlyout x:Name="tray_menu"
                         x:Key="TrayContextFlyout"
                         AreOpenCloseAnimationsEnabled="False">
-                <MenuFlyoutItem x:Name="menu_exit" 
-                                Text="Exit"
-                                Command="{StaticResource ExitApplicationCommand}" />
                 <MenuFlyoutItem x:Name="menu_hex_toggle" 
                                 Text="Toggle hex values" 
                                 Command="{StaticResource ToggleHexCommand}" />
                 <MenuFlyoutItem x:Name="menu_placement_toggle" 
                                 Text="Toggle window placement" 
                                 Command="{StaticResource ToggleWindowPlacmentCommand}" />
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem x:Name="menu_exit" 
+                                Text="Exit"
+                                Command="{StaticResource ExitApplicationCommand}" />
             </MenuFlyout>
         </Grid.Resources>
 

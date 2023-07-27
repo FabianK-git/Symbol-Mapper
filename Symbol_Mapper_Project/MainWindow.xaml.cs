@@ -169,10 +169,10 @@ namespace Symbol_Mapper_Project
             }
         }
         
-        private void OnToggleWindowPlacment(object _, ExecuteRequestedEventArgs args)
+        private void OnToggleWindowPlacement(object _, ExecuteRequestedEventArgs args)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-
+            
             if (localSettings.Values["primary_window_placement"] != null)
             {
                 localSettings.Values["primary_window_placement"] = !(bool) localSettings.Values["primary_window_placement"];
@@ -410,7 +410,7 @@ namespace Symbol_Mapper_Project
             IntPtr current_monitor = User32.MonitorFromPoint(mouse_positon, User32.MonitorOptions.MONITOR_DEFAULTTONEAREST);
 
             // Create the object for the monitor information
-            User32.MONITORINFO monitor_info = new() { cbSize = Marshal.SizeOf(typeof(User32.MONITORINFO)) }; ;
+            User32.MONITORINFO monitor_info = new() { cbSize = Marshal.SizeOf(typeof(User32.MONITORINFO)) };
 
             // If the function returns true place the window on the current monitor,
             // else try to center it on primary display
